@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Labas
 {
@@ -6,24 +7,61 @@ namespace Labas
     {
         static void Main(string[] args)
         {
-            A a1 = new();
-            A a2 = new();
-            A a3 = new();
-            B b4 = new() { Obj1 = a2 };
-            C c5 = new() { Obj1 = a1, Obj2 = a3, Obj3 = b4 };
         }
     }
 
-    class A { }
+    class A
+    {
+        public float X { get; private set; }
+
+        public List<float> SolveLinear(float a, float b)
+        {
+            if (a == 0)
+            {
+                if (b == 0)
+                    throw new Exception("Уравнение имеет бесконечное количество решений");
+                throw new Exception("Уравнение не имеет корней");
+            }
+            
+            X = -b / a;
+            return new List<float>() {X};
+        }
+    }
 
     class B : A
     {
-        public object Obj1 { get; init; }
+        protected float FindDiscriminant(float a, float b, float c)
+        {
+            return (b * b) - 4 * a * c;
+        }
+
+        public List<float> Solve(float a, float b, float c)
+        {
+
+            if (a == 0)
+            {
+                return SolveLinear(b, c);
+            }
+
+
+            var discriminant = FindDiscriminant(a, b, c);
+            if (discriminant < 0)
+            {
+                return null;
+            }
+
+            if (discriminant == 0)
+            {
+                var result = -b / (2 * a);
+                return new List<float> { result };
+            }
+
+            var sqrtDisc = (float)Math.Sqrt(discriminant);
+            var result1 = (-b + sqrtDisc) / (2 * a);
+            var result2 = (-b - sqrtDisc) / (2 * a);
+            return new List<float> { result1, result2 };
+        }
     }
 
-    class C : B
-    {
-        public object Obj2 { get; init; }
-        public object Obj3 { get; init; }
-    }
+
 }
