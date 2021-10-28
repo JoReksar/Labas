@@ -5,6 +5,8 @@
 
 .idea/
 Core/
+.Core/
+version
 
 # User-specific files
 *.rsuser

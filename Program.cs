@@ -13,19 +13,19 @@ namespace Kokin
                 var a = float.Parse(Console.ReadLine());
                 var b = float.Parse(Console.ReadLine());
                 var c = float.Parse(Console.ReadLine());
-                NikitaLog.I.Log($"Введено уравнение {a}x^2{SetArithmeticSymbol(b)}{b}x{SetArithmeticSymbol(c)}{c}=0");
+                Nikita.Nikita.I.Log($"Введено уравнение {a}x^2{SetArithmeticSymbol(b)}{b}x{SetArithmeticSymbol(c)}{c}=0");
                 new QuadraticEquation().Solve(a, b, c);
             }
             catch (FormatException formatException)
             {
-                NikitaLog.I.Log(formatException.Message);
+                Nikita.Nikita.I.Log(formatException.Message);
             }
             catch (NikitaException nikitaException)
             {
-                NikitaLog.I.Log(nikitaException.Message);
+                Nikita.Nikita.I.Log(nikitaException.Message);
             }
 
-            NikitaLog.I.Write();
+            Nikita.Nikita.I.Write();
             Console.ReadKey();
 
         }
